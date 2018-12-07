@@ -13,7 +13,7 @@ Author's implementation: https://github.com/albertpumarola/GANimation
 - face-recognition 1.2.3
 
 ## Data
-1. Apply for [Emotionet dataset](http://cbcsl.ece.ohio-state.edu/emotionet.html) and select 20k images.
+1. Apply for [Emotionet dataset](http://cbcsl.ece.ohio-state.edu/emotionet.html) and select 200k images.
 2. Extract AU feature by [OpenFace](https://github.com/TadasBaltrusaitis/OpenFace/wiki/Action-Units).
 ```
 FeatureExtraction -fdir src_image_dir -aus

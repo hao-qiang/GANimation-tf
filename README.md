@@ -1,6 +1,8 @@
 # GANimation-tf
 A tensorflow implementation of GANimation
+
 paper: https://arxiv.org/abs/1807.09251
+
 Author's implementation: https://github.com/albertpumarola/GANimation
 
 ## Requirements

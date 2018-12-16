@@ -16,10 +16,10 @@ Author's implementation: https://github.com/albertpumarola/GANimation
 1. Apply for [Emotionet dataset](http://cbcsl.ece.ohio-state.edu/emotionet.html) and select 200k images.
 2. Extract AU feature by [OpenFace](https://github.com/TadasBaltrusaitis/OpenFace/wiki/Action-Units).
 ```
-FeatureExtraction -fdir src_image_dir -aus
+FeatureExtraction -fdir src_image_dir/ -aus
 ```
 3. Detect and crop face by [face-recognition](https://pypi.org/project/face_recognition/) library and resize to 128x128x3.
-4. Generate 'aus.pkl', (please refer to paper author's github) and move it to 'data/'.
+4. Generate 'aus.pkl' (please refer to paper author's github) and move it to 'data/'.
 5. move the face images to folder 'data/imgs'.
 
 ## Training

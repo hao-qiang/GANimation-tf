@@ -39,15 +39,16 @@ def res_block_rfpad(x_in, out_channels=512, name='ResBlock'):
         return tf.add(x_in, x)
         
         
-def instance_norm(x, epsilon=1e-5, name='InstNorm'):
+def instance_norm(x, name='InstNorm'):
     with tf.variable_scope(name):
-        stat_shape = x.get_shape().as_list()
-        scale = tf.get_variable('scale', initializer=tf.random_normal_initializer(1.0, 0.02))
-        shift = tf.get_variable('shift', initializer=tf.constant_initializer(0.0))
+        depth = x.get_shape()[3]
+        scale = tf.get_variable('scale', [depth], initializer=tf.random_normal_initializer(1.0, 0.02))
+        shift = tf.get_variable('shift', [depth], initializer=tf.constant_initializer(0.0))
 
-        inst_means, inst_vars = tf.nn.moments(x, axes=[1, 2], keep_dims=True)
+        mean, variance = tf.nn.moments(x, axes=[1, 2], keep_dims=True)
         # Normalization
-        inputs_normed = (x - inst_means) / tf.sqrt(inst_vars + epsilon)
+        epsilon = 1e-5
+        inputs_normed = (x - mean) * tf.rsqrt(variance + epsilon)
         # Perform trainable shift.
         output = scale * inputs_normed + shift
         return output

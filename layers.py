@@ -24,19 +24,6 @@ def res_block(x_in, out_channels=512, name='ResBlock'):
         x = conv2d(x, out_channels=out_channels, kernel_size=3, strides=1, name='Conv2')
         x = instance_norm(x, name='InstNorm2')
         return tf.add(x_in, x)
-
-
-def res_block_rfpad(x_in, out_channels=512, name='ResBlock'):
-    with tf.variable_scope(name):
-        x = reflect_pad(x_in, padsize=1, name='ReflectPad1')
-        x = conv2d(x, out_channels=out_channels, kernel_size=3, strides=1, padding='valid', name='Conv1')
-        x = instance_norm(x, name='InstNorm1')
-        x = tf.nn.relu(x, name='ReLU1')
-
-        x = reflect_pad(x, padsize=1, name='ReflectPad1')
-        x = conv2d(x, out_channels=out_channels, kernel_size=3, strides=1, padding='valid', name='Conv2')
-        x = instance_norm(x, name='InstNorm2')
-        return tf.add(x_in, x)
         
         
 def instance_norm(x, name='InstNorm'):
@@ -52,9 +39,3 @@ def instance_norm(x, name='InstNorm'):
         # Perform trainable shift.
         output = scale * inputs_normed + shift
         return output
-
-
-def reflect_pad(x, padsize=1, name='ReflectPad'):
-    with tf.variable_scope(name):
-        h = tf.pad(x, paddings=[[0, 0], [padsize, padsize], [padsize, padsize], [0, 0]], mode='REFLECT')
-        return h

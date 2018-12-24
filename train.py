@@ -107,6 +107,7 @@ d_sum = tf.summary.merge([loss_d_sum, loss_d_img_sum, loss_d_au_sum, loss_d_gp_s
 face, au = load_data(face_dir, au_dir)
 au_rand = au.copy()
 np.random.shuffle(au_rand)
+au_rand += np.random.uniform(-0.1, 0.1, au_rand.shape)
 
 
 # ============= train =============

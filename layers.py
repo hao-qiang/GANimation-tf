@@ -15,7 +15,7 @@ def deconv2d(x, out_channels, kernel_size=4, stride=2, padding='same', name="Dec
                                           kernel_initializer=initializer, use_bias=False)
 
 
-def res_block(x_in, out_channels=512, name='ResBlock'):
+def res_block(x_in, out_channels=256, name='ResBlock'):
     with tf.variable_scope(name):
         x = conv2d(x_in, out_channels=out_channels, kernel_size=3, strides=1, name='Conv1')
         x = instance_norm(x, name='InstNorm1')

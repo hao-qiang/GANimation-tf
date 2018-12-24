@@ -5,7 +5,7 @@ def conv2d(x, out_channels, kernel_size=4, strides=2, padding='same', use_bias=F
     with tf.variable_scope(name):
         initializer = tf.random_normal_initializer(0, 0.02)
         return tf.layers.conv2d(x, out_channels, kernel_size=kernel_size, strides=strides, padding=padding,
-                                kernel_initializer=initializer, use_bias=False)
+                                kernel_initializer=initializer, use_bias=use_bias)
 
 
 def deconv2d(x, out_channels, kernel_size=4, stride=2, padding='same', name="Deconv"):

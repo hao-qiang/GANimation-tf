@@ -6,7 +6,7 @@ import pickle
 
 
 face_path = 'imgs/'
-aus_path = 'aus_openface/'
+aus_path = 'aus/'
 aus_save_path = 'aus.pkl'
 
 

@@ -7,7 +7,7 @@ import pickle
 
 face_path = 'imgs/'
 face_remove_path = 'imgs_remove/'
-aus_path = 'aus/'
+aus_path = 'aus_openface/'
 aus_save_path = 'aus.pkl'
 
 os.makedirs(face_remove_path, exist_ok=True)

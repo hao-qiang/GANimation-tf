@@ -1,6 +1,6 @@
 import pickle
 
-with open('data/aus.pkl', 'rb') as f:
+with open('aus.pkl', 'rb') as f:
     aus = pickle.load(f)
 
 #print(aus)

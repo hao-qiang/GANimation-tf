@@ -1,5 +1,5 @@
 import os
-os.environ['CUDA_VISIBLE_DEVICES']='0'
+os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 import tensorflow as tf
 import numpy as np
 from models import generator, discriminator
@@ -47,7 +47,7 @@ pred_fake_img_masked, pred_fake_au = discriminator(fake_img_masked, reuse=True)
 # ============= losses =============
 # G losses
 loss_g_fake_img_masked = -tf.reduce_mean(pred_fake_img_masked) * lambda_D_img
-loss_g_fake_au = l2_loss(desired_au, pred_fake_au) * lambda_D_au
+loss_g_fake_au = l2_loss(desired_au, pred_fake_au) / 25 * lambda_D_au
 loss_g_cyc = l1_loss(real_img, cyc_img_masked) * lambda_cyc
 
 loss_g_mask_fake = tf.reduce_mean(fake_mask) * lambda_mask + smooth_loss(fake_mask) * lambda_mask_smooth
@@ -59,7 +59,7 @@ loss_g = loss_g_fake_img_masked + loss_g_fake_au + \
 
 # D losses
 loss_d_img = -tf.reduce_mean(pred_real_img) * lambda_D_img + tf.reduce_mean(pred_fake_img_masked) * lambda_D_img
-loss_d_au = l2_loss(real_au, pred_real_au) * lambda_D_au
+loss_d_au = l2_loss(real_au, pred_real_au) / 25 * lambda_D_au
 
 alpha = tf.random_uniform([BATCH_SIZE, 1, 1, 1], minval=0., maxval=1.)
 differences = fake_img_masked - real_img
@@ -112,8 +112,8 @@ au_rand += np.random.uniform(-0.1, 0.1, au_rand.shape)
 
 # ============= train =============
 train_vars = tf.trainable_variables()
-g_vars = [var for var in train_vars if var.name.startswith('generator')]
-d_vars = [var for var in train_vars if var.name.startswith('discriminator')]
+g_vars = [var for var in train_vars if var.name.startswith('Generator')]
+d_vars = [var for var in train_vars if var.name.startswith('Discriminator')]
 
 g_train_op = tf.train.AdamOptimizer(learning_rate=lr, beta1=0.5, beta2=0.999).minimize(loss_g, var_list=g_vars)
 d_train_op = tf.train.AdamOptimizer(learning_rate=lr, beta1=0.5, beta2=0.999).minimize(loss_d, var_list=d_vars)
@@ -128,13 +128,13 @@ with tf.Session() as sess:
     writer = tf.summary.FileWriter("./logs/", sess.graph)
     print('----------- start training -----------')
 
-    for e in range(EPOCHS):
+    for e in range(1, EPOCHS+1):
         start_time = time.time()
-        if e < 20:
+        if e <= 21:
             lr_now = 1e-4
         else:
-            lr_now = 1e-5 * (EPOCHS - e)
-        print('===== [Epoch %02d/30](lr: %.5f) =====' % (e+1, lr_now))
+            lr_now = 1e-5 * (EPOCHS + 1 - e)
+        print('===== [Epoch %02d/30](lr: %.5f) =====' % (e, lr_now))
 
         for i in range(len(face) // BATCH_SIZE):
             d_loss, summary_str, _ = sess.run([loss_d, d_sum, d_train_op],
@@ -155,4 +155,4 @@ with tf.Session() as sess:
         print('(spend time: %.2fmin) loss_g: %.4f  loss_d: %.4f \n' %
               ((time.time()-start_time)/60, g_loss, d_loss))
 
-        saver.save(sess, 'weights/ganimation_epoch%2d.ckpt' % (e+1))
+        saver.save(sess, 'weights/ganimation_epoch%2d.ckpt' % e)

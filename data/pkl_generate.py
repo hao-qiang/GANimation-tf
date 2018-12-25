@@ -6,9 +6,11 @@ import pickle
 
 
 face_path = 'imgs/'
+face_remove_path = 'imgs_remove/'
 aus_path = 'aus/'
 aus_save_path = 'aus.pkl'
 
+os.makedirs(face_remove_path, exist_ok=True)
 
 face_names = os.listdir(face_path)
 face_names.sort()
@@ -23,6 +25,8 @@ for file_path in tqdm(file_paths):
         content = np.loadtxt(file_path, delimiter=', ', skiprows=1)
         if content.ndim == 1 and len(content) == 37:
             data[file_name] = content[2:19]
+    else:
+        os.rename(face_path+file_name+'.jpg', face_remove_path+file_name+'.jpg')
 
 with open(aus_save_path, 'wb') as f:
     pickle.dump(data, f, pickle.HIGHEST_PROTOCOL)

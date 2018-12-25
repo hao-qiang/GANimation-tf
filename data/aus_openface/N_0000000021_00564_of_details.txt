@@ -1,0 +1,10 @@
+Input:C:\Users\haoq\Desktop\GANimation_my\dataset\emotionet\N_0000000021_00564.jpg
+Input full path:C:\Users\haoq\Desktop\GANimation_my\dataset\emotionet\N_0000000021_00564.jpg
+Camera parameters:481.641,481.641,216.5,300
+Output csv:N_0000000021_00564.csv
+Gaze: 0
+AUs: 1
+Landmarks 2D: 0
+Landmarks 3D: 0
+Pose: 0
+Shape parameters: 0

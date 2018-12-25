@@ -5,7 +5,7 @@ import numpy as np
 import pickle
 
 
-face_path = 'emotionet/'
+face_path = 'imgs/'
 aus_path = 'aus_openface/'
 aus_save_path = 'aus.pkl'
 

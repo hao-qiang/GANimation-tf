@@ -18,10 +18,8 @@ Author's implementation: https://github.com/albertpumarola/GANimation
 ```
 FeatureExtraction -fdir src_image_dir/ -aus
 ```
-3. Detect and crop face by [face-recognition](https://pypi.org/project/face_recognition/) library and resize to 128x128x3 (use 'data/face_crop.py').
-4. Check each data pare (au file and face img) (use 'data/data_check.py').
-5. Generate 'aus.pkl' (please refer to paper author's github) and move it to 'data/' (use 'data/pkl_generate.py').
-6. Move the face images to folder 'data/imgs'.
+3. Detect and crop face by [face-recognition](https://pypi.org/project/face_recognition/) library and resize to 128x128x3 then save at 'data/imgs' (use 'data/face_crop.py').
+4. Generate 'aus.pkl' (please refer to paper author's github) at 'data/' (use 'data/pkl_generate.py').
 
 ## Training
 ```

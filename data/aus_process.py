@@ -5,8 +5,8 @@ import numpy as np
 import pickle
 
 
-face_path = 'dataset/emotionet/'
-aus_path = 'dataset/aus_openface/'
+face_path = 'emotionet/'
+aus_path = 'aus_openface/'
 aus_save_path = 'aus.pkl'
 
 

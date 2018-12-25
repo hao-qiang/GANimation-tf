@@ -8,7 +8,6 @@ import pickle
 face_path = 'imgs/'
 face_remove_path = 'imgs_remove/'
 aus_path = 'aus_openface/'
-aus_save_path = 'aus.pkl'
 
 os.makedirs(face_remove_path, exist_ok=True)
 
@@ -28,5 +27,5 @@ for file_path in tqdm(file_paths):
     else:
         os.rename(face_path+file_name+'.jpg', face_remove_path+file_name+'.jpg')
 
-with open(aus_save_path, 'wb') as f:
+with open(aus.pkl, 'wb') as f:
     pickle.dump(data, f, pickle.HIGHEST_PROTOCOL)

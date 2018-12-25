@@ -4,8 +4,8 @@ import face_recognition
 from tqdm import tqdm
 
 
-data_path = 'data/emotionet/'
-save_path = 'data/imgs/'
+data_path = 'emotionet/'
+save_path = 'imgs/'
 
 if not os.path.exists(save_path):
     os.makedirs(save_path)

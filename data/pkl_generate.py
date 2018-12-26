@@ -27,5 +27,5 @@ for file_path in tqdm(file_paths):
     else:
         os.rename(face_path+file_name+'.jpg', face_remove_path+file_name+'.jpg')
 
-with open(aus.pkl, 'wb') as f:
+with open('aus.pkl', 'wb') as f:
     pickle.dump(data, f, pickle.HIGHEST_PROTOCOL)

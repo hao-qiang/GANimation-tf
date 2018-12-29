@@ -47,7 +47,7 @@ pred_fake_img_masked, pred_fake_au = discriminator(fake_img_masked, reuse=True)
 # ============= losses =============
 # G losses
 loss_g_fake_img_masked = -tf.reduce_mean(pred_fake_img_masked) * lambda_D_img
-loss_g_fake_au = l2_loss(desired_au, pred_fake_au) / 5 * lambda_D_au
+loss_g_fake_au = l2_loss(desired_au, pred_fake_au) * lambda_D_au
 loss_g_cyc = l1_loss(real_img, cyc_img_masked) * lambda_cyc
 
 loss_g_mask_fake = tf.reduce_mean(fake_mask) * lambda_mask + smooth_loss(fake_mask) * lambda_mask_smooth
@@ -59,7 +59,7 @@ loss_g = loss_g_fake_img_masked + loss_g_fake_au + \
 
 # D losses
 loss_d_img = -tf.reduce_mean(pred_real_img) * lambda_D_img + tf.reduce_mean(pred_fake_img_masked) * lambda_D_img
-loss_d_au = l2_loss(real_au, pred_real_au) / 5 * lambda_D_au
+loss_d_au = l2_loss(real_au, pred_real_au) * lambda_D_au
 
 alpha = tf.random_uniform([BATCH_SIZE, 1, 1, 1], minval=0., maxval=1.)
 differences = fake_img_masked - real_img
